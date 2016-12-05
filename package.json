@@ -1,0 +1,17 @@
+{
+  "name": "fh-wfm-store-mongoose",
+  "version": "0.0.1",
+  "description": "Storage module for Raincathcer resources using Mongoose",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Niall Donnelly",
+  "license": "MIT",
+  "dependencies": {
+    "mongoose": "3.1.0",
+    "q": "^1.4.1"
+  },
+  "devDependencies": {
+  }
+}
