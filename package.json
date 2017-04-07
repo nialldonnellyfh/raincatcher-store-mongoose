@@ -1,0 +1,35 @@
+{
+  "name": "raincatcher-mongoose-store",
+  "version": "1.0.0",
+  "description": "Direct mongoose storage",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/feedhenry-raincatcher/raincatcher-mongoose-store.git"
+  },
+  "keywords": [
+    "wfm",
+    "storage",
+    "mongo",
+    "raincatcher"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "0.4.5",
+    "grunt-eslint": "19.0.0",
+    "grunt-shell": "2.1.0",
+    "load-grunt-tasks": "3.5.2",
+    "mocha": "3.2.0"
+  },
+  "dependencies": {
+    "bluebird": "3.5.0",
+    "fh-mongoose-connector": "git+https://github.com/col1985/fh-mongoose-connector.git",
+    "fh-wfm-mediator": "0.3.1",
+    "lodash": "4.17.4",
+    "mongoose": "4.9.1",
+    "shortid": "2.2.8"
+  }
+}
