@@ -8,7 +8,7 @@ var dataset = config.datasetIDs;
 
 var gpsSchema = new Schema({
 
-});
+},  {timestamps: true});
 
 module.exports = function(db) {
   var model = db.model(labels.GPS, gpsSchema, dataset.GPS);

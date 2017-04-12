@@ -1,36 +1,24 @@
+'use strict';
+
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var config = require('./../lib/config');
 var labels = config.modelLabels;
 var dataset = config.datasetIDs;
 
-var messagesSchema = new Schema({
+var groupSchema = new Schema({
   id: {
     type: String
   },
-  receiverId: {
+  name: {
     type: String
   },
-  status: {
-    type: String
-  },
-  sender: {
-    avatar: {
-      type: String
-    },
-    name: {
-      type: String
-    }
-  },
-  subject: {
-    type: String
-  },
-  content: {
+  role: {
     type: String
   }
 },  {timestamps: true});
 
 module.exports = function(db) {
-  var model = db.model(labels.MESSAGES, messagesSchema, dataset.MESSAGES);
+  var model = db.model(labels.GROUP, groupSchema, dataset.GROUP);
   return model;
 };

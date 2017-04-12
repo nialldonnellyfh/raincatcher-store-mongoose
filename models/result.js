@@ -17,10 +17,13 @@ var resultSchema = new Schema({
   id: {
     type: String
   },
+  nextStepIndex: {
+    type: String
+  },
   stepResults: Schema.Types.Mixed
-}, { strict: false, versionKey: false });
+}, {timestamps: true});
 
 module.exports = function(db) {
-  var model = db.model(dataset.RESULT, resultSchema, dataset.RESULT);
+  var model = db.model(labels.RESULT, resultSchema, dataset.RESULT);
   return model;
 };

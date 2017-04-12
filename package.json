@@ -1,6 +1,6 @@
 {
-  "name": "raincatcher-mongoose-store",
-  "version": "1.0.0",
+  "name": "fh-wfm-mongoose-store",
+  "version": "0.1.0",
   "description": "Direct mongoose storage",
   "main": "./lib/index.js",
   "scripts": {
@@ -26,9 +26,9 @@
   },
   "dependencies": {
     "bluebird": "3.5.0",
-    "fh-mongoose-connector": "git+https://github.com/col1985/fh-mongoose-connector.git",
     "fh-wfm-mediator": "0.3.1",
     "lodash": "4.17.4",
+    "moment": "^2.18.1",
     "mongoose": "4.9.1",
     "shortid": "2.2.8"
   }

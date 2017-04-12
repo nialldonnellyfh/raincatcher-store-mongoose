@@ -1,11 +1,12 @@
 'use strict';
 
 var config = require('./../lib/config');
-var Mongoose = require('mongoose');
 var assert = require('assert');
 var Models = require('./../models');
 var Connector = require('./../lib');
 var DB = {};
+
+var mongoUri = 'mongodb://localhost:27017/raincatcher-mongo-connector';
 
 describe(config.module, function() {
   var testDal = {};
@@ -13,7 +14,7 @@ describe(config.module, function() {
 
   it('should connect to test db', function(done) {
     this.timeout(2000);
-    Connector.connect(config.test.mongoUri, {}).then(function(db) {
+    Connector.connect(mongoUri, {}).then(function(db) {
       DB = db;
       done(assert.equal(DB, db));
     }, function(error) {
@@ -106,8 +107,8 @@ describe(config.module, function() {
     });
   });
 
-  it('should delete test record', function(done) {
-    testDal.delete(testDoc).then(function() {
+  it('should remove test record', function(done) {
+    testDal.remove(testDoc).then(function() {
       done();
     }, function(error) {
       done(error);
