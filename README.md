@@ -1,5 +1,5 @@
-mongo-connector
-===============
+### raincatcher-mongoose-store
+
 
 One stop shop for all Mongoose schemas 
 
@@ -35,7 +35,7 @@ Connector.connect('mongodb://mongoUriGoseHere:27017/db', {})
 Get the Data access layer object for a collection/dataset.
 
 ```javascript
-Connector.getDAL(collectionName, Model).
+Connector.getDataAccessLayer(collectionName, Model).
   then(function(_dal) {
     // do stuff with collection dal
   }, function(error) {
@@ -53,7 +53,3 @@ Connector.disconnect()
     // something went wrong
   });
 ```
-
-### Contributing
-
-If updating or adding addtions to the module, please ensure tests are passing before submiting.
