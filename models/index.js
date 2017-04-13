@@ -1,6 +1,6 @@
-'use strict';
-
-// TODO move to the modules
+//'use strict';
+//
+//// TODO move to the modules
 module.exports = {
   messages: require('./messages'),
   gps: require('./gps'),
