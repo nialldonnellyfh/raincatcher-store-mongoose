@@ -4,7 +4,7 @@ var config = require('./../lib/config');
 var assert = require('assert');
 var Models = require('./../models');
 var Connector = require('./../lib');
-var DB = {};
+var mongoose = require('mongoose');
 
 var mongoUri = 'mongodb://localhost:27017/raincatcher-mongo-connector';
 
@@ -12,13 +12,28 @@ describe(config.module, function() {
   var testDal = {};
   var testDoc = {};
 
-  it('should connect to test db', function(done) {
-    this.timeout(2000);
-    Connector.connect(mongoUri, {}).then(function(db) {
-      DB = db;
-      done(assert.equal(DB, db));
-    }, function(error) {
-      done(error);
+
+  it('should use custom schemas if passed', function(done) {
+    var customWorkorderSchema = new mongoose.Schema({
+      name: {type: String}
+    });
+    var customWorkorderModel;
+
+    var customDataSetModels = {
+      workorders: function(mongooseConnection) {
+        customWorkorderModel = mongooseConnection.model("Workorders", customWorkorderSchema);
+        return customWorkorderModel;
+      }
+    };
+
+    Connector.connect(mongoUri, {}, customDataSetModels).then(function() {
+      assert.ok(customWorkorderModel, "Expected workorder model to be defined");
+
+      Connector.getDAL('workorders').then(function(dal) {
+        assert.strictEqual(customWorkorderModel, dal.model, "Expected the custom workroder model instead of the default");
+        done();
+      });
+
     });
   });
 

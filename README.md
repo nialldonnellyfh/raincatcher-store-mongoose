@@ -21,12 +21,33 @@ Mongoose models can be found in `models` directory. To add a new model use the s
 
 To connect to mongo
 
+
 ```javascript
-Connector.connect('mongodb://mongoUriGoseHere:27017/db', {})
-  .then(function(db) {
-    // has connection object
+
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+var customSchemas = {
+    //The key is the same as the datasetId (e.g. workorders)
+    workorders: function(mongooseConnection) {
+        var customWorkorderSchema = new Schema({
+            ...
+            name: {type: String}
+            ...
+        },  {timestamps: true});
+        
+        mongooseConnection.model('CustomWorkorderModel', customWorkorderSchema);
+    }
+    ... 
+    //Any other custom schemas
+    ...
+};
+
+Connector.connect('mongodb://mongoUriGoseHere:27017/db', {}, customSchemas)
+  .then(function() {
+    // connected successfully
   }, function(error) {
-    // handle error
+    // An error occurred when connecting
   });
 ```
 
@@ -35,9 +56,12 @@ Connector.connect('mongodb://mongoUriGoseHere:27017/db', {})
 Get the Data access layer object for a collection/dataset.
 
 ```javascript
-Connector.getDataAccessLayer(collectionName, Model).
+
+var datasetId = "workorders";
+
+Connector.getDAL(datasetId).
   then(function(_dal) {
-    // do stuff with collection dal
+    // do stuff with dataset dal
   }, function(error) {
     // handle error
   });
