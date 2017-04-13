@@ -1,6 +1,6 @@
 {
   "name": "fh-wfm-mongoose-store",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Direct mongoose storage",
   "main": "./lib/index.js",
   "scripts": {
