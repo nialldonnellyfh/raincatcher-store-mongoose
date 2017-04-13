@@ -9,6 +9,7 @@ var dataset = config.datasetIDs;
 var fileSchema = new Schema({
   id: String,
   uid: String,
+  owner: String,
   name: {
     type: String
   },
