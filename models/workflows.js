@@ -34,7 +34,7 @@ var workflowSchema = new Schema({
   steps: {
     type: [stepSchema]
   }
-}, { strict: false, versionKey: false });
+}, { timestamps: true, strict: false, versionKey: false });
 
 
 
