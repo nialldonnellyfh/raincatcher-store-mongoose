@@ -104,8 +104,18 @@ describe(config.module, function() {
     });
   });
 
+  it('should return an error if no record exists', function(done) {
+    var id = "idontexist";
+    testDal.read(id).then(function() {
+      done(new Error("Expected an error"));
+    }, function(error) {
+      assert.ok(error, "Expected an error");
+      done();
+    });
+  });
+
   it('should read test record', function(done) {
-    var id = testDoc._id;
+    var id = testDoc.id;
     testDal.read(id).then(function() {
       done();
     }, function(error) {
