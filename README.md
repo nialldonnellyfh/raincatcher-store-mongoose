@@ -69,6 +69,49 @@ Connector.getDAL(datasetId).
   });
 ```
 
+#### listen
+
+The Data Access Layer object for a collection has a `listen` function that ensures that the CRUDL topics for the data set are subscribed.
+
+```javascript
+
+/**
+* This function has access to the mongoose Model associated with the data set
+* through the "model" property
+*
+* @returns {Promise}
+*/
+function customListFunction() {
+  return this.model.list();
+}
+
+
+var datasetId = "workorders";
+
+Connector.getDAL(datasetId).
+  then(function(_dal) {
+    
+    //This function will subscribe to the CRUDL topics for "workorders"
+    //The "list" topic will execute the "customListFunction"
+    //Note: This function will only overrdie the "list" topic for a single data set.
+    _dal.listen(":data", mediator, {
+        list: customListFunction
+    });
+    
+  }, function(error) {
+    // handle error
+  });
+
+```
+
+The following functions are overridable:
+
+- create
+- update
+- list
+- remove
+- read
+
 #### disconnect
 
 ```javascript
@@ -79,3 +122,5 @@ Connector.disconnect()
     // something went wrong
   });
 ```
+
+
