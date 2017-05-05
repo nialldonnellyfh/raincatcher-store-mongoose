@@ -6,6 +6,7 @@ var Models = require('./../models');
 var Connector = require('./../lib');
 var mongoose = require('mongoose');
 var expect = require('expect');
+var _ = require('lodash');
 
 var mongoUri = 'mongodb://localhost:27017/raincatcher-mongo-connector';
 
@@ -92,7 +93,9 @@ describe(config.module, function() {
 
   it('should add item to result collection', function(done) {
     testDal.create({
+      id: "testid",
       status: 'test',
+      _localuid: "localid",
       workorderId: '1234567890'
     }).then(function(doc) {
       testDoc = doc;
@@ -115,6 +118,15 @@ describe(config.module, function() {
     testDal.update(testDoc).then(function(result) {
       testDoc = result;
       done(assert.equal(result.id, id));
+    }, function(error) {
+      done(error);
+    });
+  });
+
+  it('should update with a local id', function(done) {
+    testDal.update(_.omit(testDoc, 'id')).then(function(result) {
+      testDoc = result;
+      done(assert.equal(result._localuid, 'localid'));
     }, function(error) {
       done(error);
     });
