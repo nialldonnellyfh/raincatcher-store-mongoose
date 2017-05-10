@@ -18,6 +18,7 @@ describe("Mongoose Store Listen", function() {
 
   var listTopic = "wfm:mockdatasetid:list";
   var doneListTopic = "done:wfm:mockdatasetid:list";
+  var errorListTopic = "error:wfm:mockdatasetid:list";
 
   function MockStore(datasetId, model) {
     this.datasetId = datasetId;
@@ -54,6 +55,26 @@ describe("Mongoose Store Listen", function() {
 
     return donePromise.then(function() {
       sinon.assert.calledOnce(stubs.list);
+    });
+  });
+
+  it("should publish an error topic", function() {
+    decorate(MockStore);
+
+    var listErrorStub = sinon.stub().rejects(new Error("Error Listing"));
+
+    mockStore = new MockStore("mockdatasetid");
+
+    mockStore.listen("", mediator, {
+      list: listErrorStub
+    });
+
+    var errorPromise = mediator.promise(errorListTopic);
+
+    mediator.publish(listTopic);
+
+    return errorPromise.then(function() {
+      sinon.assert.calledOnce(listErrorStub);
     });
   });
 
